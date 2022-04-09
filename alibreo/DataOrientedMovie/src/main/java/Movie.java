@@ -45,18 +45,14 @@ public class Movie {
         return discountConditionList.stream().anyMatch(condition -> condition.isStatisfiedBy(screening));
     }
 
-    public Money calculateFee() {
-        switch (getMovieType()) {
-            case AMOUNT_DISCOUNT:
-//                if (isDiscountable(whenScreened, sequence)) {
-                    return calculateAmountDiscountedFee();
-//                }
-            case PERCENT_DISCOUNT:
-//                if (isDiscountable(whenScreened, sequence)) {
-                    return calculatePercentDiscountedFee();
-//                }
-            case NONE_DISCOUNT:
-                return calculateNoneDiscountedFee();
+    public Money calculateFee(Screening screening) {
+        if (isDiscountable(screening)) {
+            return fee.minus(calculateDiscountAmount());
         }
+        return fee;
+    }
+
+    private Money calculateDiscountAmount() {
+        return null;
     }
 }
