@@ -3,7 +3,7 @@ package chap05;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-public class SequenceCondition {
+public class SequenceCondition implements DiscountCondition{
     private int sequence;
 
     public SequenceCondition(int sequence) {
