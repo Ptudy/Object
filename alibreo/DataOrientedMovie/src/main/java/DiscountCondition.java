@@ -13,21 +13,21 @@ public class DiscountCondition {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public boolean isDiscountable(DayOfWeek dayOfWeek, LocalTime time) {
-        if (type != DiscountConditionType.PERIOD) {
-            throw new IllegalArgumentException();
-        }
-
+    public boolean isSatisfiedByPeriod(Screening screening) {
+        LocalTime time = screening.getWhenScreenedTime();
         return this.dayOfWeek.equals(dayOfWeek) &&
                 this.startTime.compareTo(time) <= 0 &&
                 this.endTime.compareTo(time) >= 0;
     }
 
-    public boolean isDiscountable(int sequence) {
-        if (type != DiscountConditionType.SEQUENCE) {
-            throw new IllegalArgumentException();
-        }
+    public boolean isStatisfiedBySequence(Screening screening) {
+        return sequence == screening.getSequence();
+    }
 
-        return this.sequence == sequence;
+    public boolean isStatisfiedBy(Screening screening) {
+        if (type == DiscountConditionType.PERIOD) {
+            return isSatisfiedByPeriod(screening);
+        }
+        return isStatisfiedBySequence(screening);
     }
 }

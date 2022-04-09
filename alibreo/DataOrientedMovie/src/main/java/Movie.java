@@ -41,18 +41,22 @@ public class Movie {
         return fee;
     }
 
-    public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
-        for (DiscountCondition condition : discountConditionList) {
-            if (condition.getType() == DiscountConditionType.PERIOD) {
-                if (condition.isDiscountable(whenScreened.getDayOfWeek(), whenScreened.toLocalTime())) {
-                    return true;
-                }
-            } else {
-                if (condition.isDiscountable(sequence)) {
-                    return true;
-                }
-            }
+    public boolean isDiscountable(Screening screening) {
+        return discountConditionList.stream().anyMatch(condition -> condition.isStatisfiedBy(screening));
+    }
+
+    public Money calculateFee() {
+        switch (getMovieType()) {
+            case AMOUNT_DISCOUNT:
+//                if (isDiscountable(whenScreened, sequence)) {
+                    return calculateAmountDiscountedFee();
+//                }
+            case PERCENT_DISCOUNT:
+//                if (isDiscountable(whenScreened, sequence)) {
+                    return calculatePercentDiscountedFee();
+//                }
+            case NONE_DISCOUNT:
+                return calculateNoneDiscountedFee();
         }
-        return false;
     }
 }
