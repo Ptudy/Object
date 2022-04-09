@@ -1,0 +1,31 @@
+package chapter1.ver6.ticketoffice;
+
+import chapter1.ver6.ticket.Ticket;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class TicketOffice {
+    private Long amount;
+    private List<Ticket> tickets = new ArrayList<>();
+
+    public TicketOffice(Long amount, Ticket... tickets) {
+        this.amount = amount;
+        this.tickets.addAll(Arrays.asList(tickets));
+    }
+
+    public Ticket issueTicket() {
+        Ticket issuedTicket = tickets.remove(0);
+        minusAmount(issuedTicket.getFee());
+        return issuedTicket;
+    }
+
+    private void minusAmount(Long amount) {
+        this.amount -= amount;
+    }
+
+    private void plusAmount(Long amount) {
+        this.amount += amount;
+    }
+}
