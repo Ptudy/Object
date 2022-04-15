@@ -12,5 +12,9 @@ public class Main {
                 Duration.ofMinutes(30));
         RecurringSchedule schedule = new RecurringSchedule("회의", DayOfWeek.WEDNESDAY,
                 LocalTime.of(10, 30), Duration.ofMinutes(30));
+
+        if(!meeting.isSatisfied(schedule)) {
+            meeting.reschedule(schedule);
+        }
     }
 }
