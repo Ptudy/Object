@@ -13,7 +13,6 @@ public class TicketOffice {
         this.tickets.addAll(Arrays.asList(tickets));
     }
 
-    // getter 명칭에 비해 동작방식이 상식에 어긋남
     public Ticket getTicket() {
         return tickets.remove(0);
     }
