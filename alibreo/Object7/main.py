@@ -15,10 +15,22 @@ def calculatePayFor(name, taxRate):
 def describeResult(name, pay):
     return "이름: " + name + "급여: " + str(pay)
 
-def main(name):
+def sumOfBasePays():
+    result = 0
+    for basePay in basePays:
+        result += basePay
+    print(result)
+
+def calculatePay(name):
     taxRate = getTaxRate()
     pay = calculatePayFor(name, taxRate)
     print(describeResult(name, pay))
 
-main("직원C")
+def main(operation, args = {}):
+    if operation == "pay":
+        calculatePay(args["name"])
+    elif operation == "basePays":
+        sumOfBasePays()
 
+# main("pay", {"name": "직원C"})
+main("basePays")
