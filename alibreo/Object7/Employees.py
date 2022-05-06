@@ -10,30 +10,26 @@ hourlys = [False, False, False, True, True, True]
 timeCards = [0, 0, 0, 120, 120, 120]
 
 class Employee:
-    def __init__(self, name, basePay, hourly, timeCard):
+    def __init__(self, name, basePay):
         self.name = name
         self.basePay = basePay
-        self.hourly = hourly
+
+class SalariedEmployee(Employee):
+    def calculatePay(self, taxRate):
+        return self.basePay - self.basePay * taxRate
+    
+    def monthlyBasePay(self):
+        return basePay
+    
+class HourlyEmployee(Employee):
+    def __init__(self, name, basePay, timeCard):
+        Employee.__init__(self, name, basePay)
         self.timeCard = timeCard
 
-    def calculatePay(self, taxRate):
-        if self.hourly:
-            pay = self.calculateHourlyPay(taxRate)
-        else:
-            pay = self.calculateSalariedPay(taxRate)
-        return pay
-
-    def calculateHourlyPay(self, taxRate):
-        return self.basePay * self.timeCard - (self.basePay * self.timeCard) * taxRate
-
-    def calculateSalariedPay(self, taxRate):
-        return self.monthlyBasePay() - (self.monthlyBasePay() * taxRate)
-
+    def calculatePay(taxRate):
+        return basePay * timeCard - basePay * timeCard * taxRate
+    
     def monthlyBasePay(self):
-        if self.hourly:
-            return 0
-        return self.basePay
-        
-employees = []
-for name, basePay, hourly, timeCard in zip(names, basePays, hourlys, timeCards):
-    employees.append(Employee(name, basePay, hourly, timeCard))
+        return 0
+
+employees = [SalariedEmployee("직원A", 400), HourlyEmployee("알바A", 1, 120)]

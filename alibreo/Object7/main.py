@@ -28,5 +28,5 @@ def main(operation, args = {}):
     elif operation == "basePays":
         sumOfBasePays()
 
-main("pay", {"name": "직원C"})
+main("pay", {"name": "직원A"})
 # main("pay")
