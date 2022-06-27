@@ -1,4 +1,10 @@
-오브젝트 정리(1~3장)
+# 관련 포스팅
+- https://www.jiniaslog.co.kr/article/view?articleId=1704
+- https://www.jiniaslog.co.kr/article/view?articleId=1352
+
+
+
+오브젝트 정리
 
 1장 객체, 설계
 
